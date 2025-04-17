@@ -1,6 +1,8 @@
 package com.amrhefny.jobtracker.users;
 
 import com.amrhefny.jobtracker.jobApplications.JobApplication;
+import com.amrhefny.jobtracker.roles.Role;
+import com.amrhefny.jobtracker.statuses.Status;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -31,13 +33,15 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String role;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final Set<JobApplication> jobApplications = new HashSet<>();
 
-    public User(String userName, String firstName, String lastName, String jobTitle, String email, String password, String role) {
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+
+    public User(String userName, String firstName, String lastName, String jobTitle, String email, String password, Role role) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,7 +51,7 @@ public class User {
         this.role = role;
     }
 
-    public User(Long id, String userName, String firstName, String lastName, String jobTitle, String email, String password, String role) {
+    public User(Long id, String userName, String firstName, String lastName, String jobTitle, String email, String password, Role role) {
         this(userName, firstName, lastName, jobTitle, email, password, role);
         this.id = id;
     }
@@ -79,7 +83,7 @@ public class User {
         return password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 }
