@@ -1,6 +1,10 @@
 package com.amrhefny.jobtracker.users;
 
+import com.amrhefny.jobtracker.jobApplications.JobApplication;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
@@ -29,6 +33,9 @@ public class User {
 
     @Column(nullable = false)
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<JobApplication> jobApplications = new HashSet<>();
 
     public User(String userName, String firstName, String lastName, String jobTitle, String email, String password, String role) {
         this.userName = userName;

@@ -1,5 +1,6 @@
 package com.amrhefny.jobtracker.jobApplications;
 
+import com.amrhefny.jobtracker.users.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,17 +22,22 @@ public class JobApplication {
     @Column(nullable = true)
     private String notes;
 
-    public JobApplication(String jobTitle, String companyName, String status, String companyLink, String jobLink, String notes) {
+    @ManyToOne
+    @JoinColumn(name = "app_user_id")
+    private User user;
+
+    public JobApplication(String jobTitle, String companyName, String status, String companyLink, String jobLink, String notes, User user) {
         this.jobTitle = jobTitle;
         this.companyName = companyName;
         this.status = status;
         this.companyLink = companyLink;
         this.jobLink = jobLink;
         this.notes = notes;
+        this.user = user;
     }
 
-    public JobApplication(Long id, String jobTitle, String companyName, String status, String companyLink, String jobLink, String notes) {
-        this(jobTitle, companyName, status, companyLink, jobLink, notes);
+    public JobApplication(Long id, String jobTitle, String companyName, String status, String companyLink, String jobLink, String notes, User user) {
+        this(jobTitle, companyName, status, companyLink, jobLink, notes, user);
         this.id = id;
     }
 
@@ -61,5 +67,9 @@ public class JobApplication {
 
     public String getNotes() {
         return notes;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
