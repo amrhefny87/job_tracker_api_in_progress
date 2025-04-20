@@ -4,6 +4,7 @@ import com.amrhefny.jobtracker.jobApplications.JobApplication;
 import com.amrhefny.jobtracker.roles.Role;
 import com.amrhefny.jobtracker.statuses.Status;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -59,6 +60,15 @@ public class User {
     public User() {
     }
 
+    public User(@NotBlank String userName, String firstName, String lastName, String jobTitle, @NotBlank String email, @NotBlank String password, String role) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -85,5 +95,33 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

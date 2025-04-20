@@ -12,6 +12,6 @@ public record UserDTO(
         String email,
         @NotBlank
         String password,
-        String role
+        Long role
 ) {
 }
