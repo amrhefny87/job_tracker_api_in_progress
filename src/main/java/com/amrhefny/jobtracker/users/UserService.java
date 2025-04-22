@@ -20,7 +20,7 @@ public class UserService {
         this.roleRespository = roleRespository;
     }
 
-    public User saveUser(UserDTO userRequest){
+    public User createUser(UserDTO userRequest){
         if(userRepository.existsByEmail(userRequest.email())){
             throw new UserExistException("User already exists");
         }
@@ -55,24 +55,26 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User updateAUser(UserDTO userRequest, Long id){
+    public User updateAUser(UserPatchDTO userPatchRequest, Long id){
         Optional<User> returturnedUser = userRepository.findById(id);
 
         if(returturnedUser.isEmpty()){
             throw new UserNotFoundException("User with id " + id + " not found");
         }
 
-        Role userRequestRole = roleRespository.findById(userRequest.role())
-                .orElseThrow(()-> new RoleNotFoundException("Role with id " + userRequest.role() + " not found"));
-
         User userToBeUpdated = returturnedUser.get();
-        userToBeUpdated.setUserName(userRequest.userName());
-        userToBeUpdated.setFirstName(userRequest.firstName());
-        userToBeUpdated.setLastName(userRequest.lastName());
-        userToBeUpdated.setJobTitle(userRequest.jobTitle());
-        userToBeUpdated.setEmail(userRequest.email());
-        userToBeUpdated.setPassword(userRequest.password());
-        userToBeUpdated.setRole(userRequestRole);
+
+        userPatchRequest.getUserName().ifProvided(userToBeUpdated::setUserName);
+        userPatchRequest.getFirstName().ifProvided(userToBeUpdated::setFirstName);
+        userPatchRequest.getLastName().ifProvided(userToBeUpdated::setLastName);
+        userPatchRequest.getJobTitle().ifProvided(userToBeUpdated::setJobTitle);
+        userPatchRequest.getEmail().ifProvided(userToBeUpdated::setEmail);
+        userPatchRequest.getPassword().ifProvided(userToBeUpdated::setPassword);
+        userPatchRequest.getRole().ifProvided(roleId->{
+           Role role = roleRespository.findById(roleId)
+                            .orElseThrow(()-> new RoleNotFoundException("Role with id " + userPatchRequest.getRole() + " not found"));
+           userToBeUpdated.setRole(role);
+        });
 
         return userRepository.save(userToBeUpdated);
     }

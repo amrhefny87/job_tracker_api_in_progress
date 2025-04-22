@@ -17,7 +17,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createAUser(@RequestBody UserDTO userRequest){
-        return ResponseEntity.status(201).body(userService.saveUser(userRequest));
+        return ResponseEntity.status(201).body(userService.createUser(userRequest));
     }
 
     @GetMapping
@@ -30,9 +30,9 @@ public class UserController {
         return ResponseEntity.status(200).body(userService.getAUser(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateAUser(@RequestBody UserDTO userRequest, @PathVariable Long id){
-        return ResponseEntity.status(200).body(userService.updateAUser(userRequest, id));
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> updateAUser(@RequestBody UserPatchDTO userPatchRequest, @PathVariable Long id){
+        return ResponseEntity.status(200).body(userService.updateAUser(userPatchRequest, id));
     }
 
     @DeleteMapping("/{id}")
