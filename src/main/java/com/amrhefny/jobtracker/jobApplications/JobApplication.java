@@ -75,4 +75,32 @@ public class JobApplication {
     public User getUser() {
         return user;
     }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setCompanyLink(String companyLink) {
+        this.companyLink = companyLink;
+    }
+
+    public void setJobLink(String jobLink) {
+        this.jobLink = jobLink;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -7,7 +7,7 @@ public record JobApplicationDTO(
     String jobTitle,
     @NotBlank
     String companyName,
-    String status,
+    Long status,
     String companyLink,
     @NotBlank
     String jobLink,
