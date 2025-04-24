@@ -84,15 +84,6 @@ class JobApplicationServiceTest {
                 "test notes",
                 1L
         );
-        this.savedJobApplication = new JobApplication(
-                "test jobTitle",
-                "test companyName",
-                savedStatus,
-                "test companyLink",
-                "test jobLink",
-                "test notes",
-                savedUser
-        );
     }
 
     @Test

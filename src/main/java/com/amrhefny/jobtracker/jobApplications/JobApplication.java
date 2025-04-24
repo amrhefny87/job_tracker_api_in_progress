@@ -48,6 +48,10 @@ public class JobApplication {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getJobTitle() {
         return jobTitle;
     }
