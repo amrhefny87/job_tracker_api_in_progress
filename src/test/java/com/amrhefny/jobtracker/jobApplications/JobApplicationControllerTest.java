@@ -194,7 +194,7 @@ class JobApplicationControllerTest {
 
     @Test
     void canUpdateOneFieldForAJobApplication() throws Exception {
-        jobApplicationRepository.save(jobApplicationToSave);
+        JobApplication savedJobApplication = jobApplicationRepository.save(jobApplicationToSave);
 
         String jobApplicationUpdateRequestJson = """
                 {
@@ -219,7 +219,7 @@ class JobApplicationControllerTest {
 
     @Test
     void canUpdateStatusFieldForAJobApplication() throws Exception {
-        jobApplicationRepository.save(jobApplicationToSave);
+        JobApplication savedJobApplication = jobApplicationRepository.save(jobApplicationToSave);
 
         Status updateStatus =  statusRepository.save(new Status("update status"));
 
@@ -246,7 +246,7 @@ class JobApplicationControllerTest {
 
     @Test
     void canUpdateUserFieldForAJobApplication() throws Exception {
-        jobApplicationRepository.save(jobApplicationToSave);
+        JobApplication savedJobApplication = jobApplicationRepository.save(jobApplicationToSave);
 
         User updateUser = userRepository.save(new User(
                 null,
