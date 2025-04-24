@@ -1,7 +1,6 @@
 package com.amrhefny.jobtracker.statuses;
 
 import com.amrhefny.jobtracker.jobApplications.JobApplication;
-import com.amrhefny.jobtracker.users.User;
 import jakarta.persistence.*;
 
 import java.util.HashSet;

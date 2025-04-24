@@ -36,8 +36,8 @@ class UserServiceTest {
 
     Role savedRole;
     RoleDTO roleRequest;
-    UserDTO userRequest;
 
+    UserDTO userRequest;
     UserPatchDTO userPatchRequestOneField;
     UserPatchDTO getUserPatchRequestRoleField;
     User savedUser;
@@ -156,8 +156,8 @@ class UserServiceTest {
         Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(savedUser));
         Mockito.when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-        UserPatchDTO userPatchRequestOneFields = new UserPatchDTO();
-        userPatchRequestOneFields.setUserName(PatchField.of("update userName"));
+        UserPatchDTO userPatchRequestOneField = new UserPatchDTO();
+        userPatchRequestOneField.setUserName(PatchField.of("update userName"));
 
         User updatedUser = new User(
                 1L,
@@ -170,7 +170,7 @@ class UserServiceTest {
                 savedRole
         );
 
-        User userResponse = userService.updateAUser(userPatchRequestOneFields, 1L);
+        User userResponse = userService.updateAUser(userPatchRequestOneField, 1L);
 
         assertEquals("update userName", userResponse.getUserName());
         assertEquals("test firstName", userResponse.getFirstName());
